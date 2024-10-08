@@ -1,6 +1,6 @@
 import getJobs from "@/apis/jobs";
 
-export async function getData() {
+export async function getJobData() {
   try {
     const res = await getJobs();
     return res;
