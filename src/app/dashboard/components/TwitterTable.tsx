@@ -3,7 +3,6 @@ import React from "react";
 import { Table } from "antd";
 import dayjs from "dayjs";
 import { Twitter } from "@/types/twitter";
-import { PageContainer } from "@ant-design/pro-components";
 
 const TweetTable = ({ data }: { data: Twitter[] }) => {
   const columns = [
@@ -11,6 +10,13 @@ const TweetTable = ({ data }: { data: Twitter[] }) => {
       title: "User",
       dataIndex: "screen_name",
       key: "screen_name",
+    },
+    {
+      title: "Text",
+      dataIndex: "text",
+      key: "text",
+      width: 300,
+      // ellipsis: true,
     },
     {
       title: "Bookmarks",
@@ -23,18 +29,6 @@ const TweetTable = ({ data }: { data: Twitter[] }) => {
       dataIndex: "favorites",
       key: "favorites",
       sorter: (a: Twitter, b: Twitter) => a.favorites - b.favorites,
-    },
-    {
-      title: "Text",
-      dataIndex: "text",
-      key: "text",
-      width: 300,
-      // ellipsis: true,
-    },
-    {
-      title: "Language",
-      dataIndex: "lang",
-      key: "lang",
     },
     {
       title: "Quotes",
@@ -55,6 +49,11 @@ const TweetTable = ({ data }: { data: Twitter[] }) => {
       sorter: (a: Twitter, b: Twitter) => a.retweets - b.retweets,
     },
     {
+      title: "Language",
+      dataIndex: "lang",
+      key: "lang",
+    },
+    {
       title: "Created At",
       dataIndex: "created_at",
       key: "created_at",
@@ -73,15 +72,13 @@ const TweetTable = ({ data }: { data: Twitter[] }) => {
   ];
 
   return (
-    <PageContainer>
-      <Table
-        columns={columns}
-        dataSource={data}
-        rowKey="_id"
-        scroll={{ x: true }}
-        pagination={{ pageSize: 10 }}
-      />
-    </PageContainer>
+    <Table
+      columns={columns}
+      dataSource={data}
+      rowKey="_id"
+      scroll={{ x: true }}
+      pagination={{ pageSize: 10 }}
+    />
   );
 };
 

@@ -1,11 +1,19 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Line } from "@ant-design/charts";
 import dayjs from "dayjs";
 import { Crypto } from "@/types/crypto";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const LineChart = ({ data }: { data: Crypto[] }) => {
-  const chartData = data.flatMap((item: Crypto) => [
+  const [chartData, setChartData] = useState<Crypto[]>([]);
+
+  useEffect(() => {
+    setChartData(data);
+  }, [data]);
+
+  const updatedData = chartData.flatMap((item: Crypto) => [
     {
       time: dayjs(item.time).format("MM-DD HH:mm"),
       price: item.price,
@@ -24,8 +32,7 @@ const LineChart = ({ data }: { data: Crypto[] }) => {
   ]);
 
   const config = {
-    data: chartData,
-    width: 1200,
+    data: updatedData,
     xField: "time",
     yField: "price",
     seriesField: "type",
@@ -49,18 +56,22 @@ const LineChart = ({ data }: { data: Crypto[] }) => {
         text: "Time",
       },
     },
-    tooltip: {
-      formatter: (datum: { price: number; type: string }) => {
-        return { name: datum.type, value: `$${datum.price}` };
-      },
-    },
+
     legend: {
       position: "top",
     },
     color: ["#1890ff", "#52c41a", "#faad14"], // Blue for current, Green for high, Orange for low
   };
 
-  return <Line {...config} />;
+  return (
+    <Spin
+      indicator={<LoadingOutlined spin />}
+      size="large"
+      spinning={chartData.length == 0}
+    >
+      <Line {...config} />
+    </Spin>
+  );
 };
 
 export default LineChart;

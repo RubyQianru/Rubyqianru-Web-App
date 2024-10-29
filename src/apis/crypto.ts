@@ -6,6 +6,7 @@ export default async function getCrypto() {
       headers: {
         Authorization: "Basic " + btoa(username + ":" + password),
       },
+      cache: "no-store",
     });
     const res = await data.json();
     return res;

@@ -6,6 +6,7 @@ export default async function getTwitters() {
       headers: {
         Authorization: "Basic " + btoa(username + ":" + password),
       },
+      cache: "no-store",
     });
     const res = await data.json();
     // console.log(res);

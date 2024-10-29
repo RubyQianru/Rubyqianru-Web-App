@@ -8,11 +8,17 @@ export default async function Dashboard() {
   const cryptoData = await getCryptoData();
   const twitterData = await getTwitterData();
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 ">
+      <div className="w-full flex items-start">
+        <Title>Bitcoin (BTC)</Title>
+      </div>
       <main className="flex flex-col gap-8 row-start-2 items-center justify-center">
-        <Title>BTC</Title>
-        <LineChart data={cryptoData} />
-        <TweetTable data={twitterData} />
+        <div className="w-full overflow-auto gap-8 flex flex-col justify-center md:w-10/12 overflow-auto ">
+          <div>
+            <LineChart data={cryptoData} />
+          </div>
+          <TweetTable data={twitterData} />
+        </div>
       </main>
     </div>
   );
