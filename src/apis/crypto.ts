@@ -1,14 +1,13 @@
-import { githubdb, username, password } from "@/config/config";
+import { cryptodb, username, password } from "@/config/config";
 
-export default async function getGithub() {
+export default async function getCrypto() {
   try {
-    const data = await fetch(githubdb, {
+    const data = await fetch(cryptodb, {
       headers: {
         Authorization: "Basic " + btoa(username + ":" + password),
       },
     });
     const res = await data.json();
-    // console.log("data fetched:", res);
     return res;
   } catch (error) {
     console.error(error);
