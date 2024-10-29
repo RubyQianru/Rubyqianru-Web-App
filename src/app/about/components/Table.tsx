@@ -1,5 +1,5 @@
 "use client";
-import { Spin, Table } from "antd";
+import { Spin, Table, Button } from "antd";
 import React, { useState, useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Repo } from "@/types/github";
@@ -24,12 +24,7 @@ export default function DataTable({ data }: { data: Repo[] }) {
       width: 400,
       key: "s_desc",
     },
-    {
-      title: "Link",
-      dataIndex: "s_url",
-      width: 400,
-      key: "s_url",
-    },
+
     {
       title: "Created At",
       dataIndex: "s_created_at",
@@ -41,6 +36,17 @@ export default function DataTable({ data }: { data: Repo[] }) {
       dataIndex: "s_updated_at",
       width: 200,
       key: "s_updated_at",
+    },
+    {
+      title: "Link",
+      dataIndex: "s_url",
+      width: 400,
+      render: (item: string) => (
+        <>
+          <Button type="primary"></Button>
+        </>
+      ),
+      key: "s_url",
     },
   ];
 
