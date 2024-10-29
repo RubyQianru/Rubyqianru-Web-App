@@ -3,6 +3,7 @@ import { Spin, Table, Button } from "antd";
 import React, { useState, useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Repo } from "@/types/github";
+import dayjs from "dayjs";
 
 export default function DataTable({ data }: { data: Repo[] }) {
   const [dataSource, setDataSource] = useState<Repo[]>([]);
@@ -30,20 +31,29 @@ export default function DataTable({ data }: { data: Repo[] }) {
       dataIndex: "s_created_at",
       width: 200,
       key: "s_created_at",
+      render: (text: string) => dayjs(text).format("YYYY-MM-DD HH:mm:ss"),
+      sorter: (a: Repo, b: Repo) =>
+        new Date(a.s_created_at).getTime() - new Date(b.s_created_at).getTime(),
     },
     {
       title: "Updated At",
       dataIndex: "s_updated_at",
       width: 200,
       key: "s_updated_at",
+      defaultSortOrder: "descend",
+      render: (text: string) => dayjs(text).format("YYYY-MM-DD HH:mm:ss"),
+      sorter: (a: Repo, b: Repo) =>
+        new Date(a.s_updated_at).getTime() - new Date(b.s_updated_at).getTime(),
     },
     {
       title: "Link",
       dataIndex: "s_url",
-      width: 400,
+      width: 100,
       render: (item: string) => (
         <>
-          <Button type="primary"></Button>
+          <Button type="primary">
+            <a href={item}>GitHub</a>
+          </Button>
         </>
       ),
       key: "s_url",
@@ -57,7 +67,7 @@ export default function DataTable({ data }: { data: Repo[] }) {
         size="large"
         spinning={dataSource.length == 0}
       >
-        <Table dataSource={dataSource} columns={columns} />
+        <Table dataSource={dataSource} columns={columns as any} />
       </Spin>
     </>
   );
