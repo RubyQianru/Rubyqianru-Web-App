@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Spin, Table, Button } from "antd";
 import React, { useState, useEffect } from "react";
@@ -67,6 +68,7 @@ export default function DataTable({ data }: { data: Repo[] }) {
         size="large"
         spinning={dataSource.length == 0}
       >
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         <Table dataSource={dataSource} columns={columns as any} />
       </Spin>
     </>
