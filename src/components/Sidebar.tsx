@@ -11,7 +11,7 @@ const Sidebar = () => {
   return (
     <Sider breakpoint="lg" collapsedWidth="0" theme="light">
       <div className="logo" />
-      <Menu theme="light" mode="inline" defaultSelectedKeys={["2"]}>
+      <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]}>
         <Menu.Item key="1" icon={<HomeOutlined />}>
           <Link href="/">Home</Link>
         </Menu.Item>

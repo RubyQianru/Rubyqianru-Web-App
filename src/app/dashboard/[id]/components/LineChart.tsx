@@ -13,23 +13,11 @@ const LineChart = ({ data }: { data: Crypto[] }) => {
     setChartData(data);
   }, [data]);
 
-  const updatedData = chartData.flatMap((item: Crypto) => [
-    {
-      time: dayjs(item.time).format("MM-DD HH:mm"),
-      price: item.price,
-      type: "Current Price",
-    },
-    {
-      time: dayjs(item.time).format("MM-DD HH:mm"),
-      price: item.dayHigh,
-      type: "Day High",
-    },
-    {
-      time: dayjs(item.time).format("MM-DD HH:mm"),
-      price: item.dayLow,
-      type: "Day Low",
-    },
-  ]);
+  const updatedData = chartData.map((item: Crypto) => ({
+    time: dayjs(item.time).format("MM-DD HH:mm"),
+    price: item.price,
+    type: "Current Price",
+  }));
 
   const config = {
     data: updatedData,
@@ -39,12 +27,8 @@ const LineChart = ({ data }: { data: Crypto[] }) => {
     smooth: true,
     line: {
       visible: true,
-      size: 2,
-    },
-    point: {
-      visible: true,
-      size: 4,
-      shape: "circle",
+      size: 5,
+      smooth: true,
     },
     yAxis: {
       title: {
@@ -56,11 +40,9 @@ const LineChart = ({ data }: { data: Crypto[] }) => {
         text: "Time",
       },
     },
-
     legend: {
       position: "top",
     },
-    color: ["#1890ff", "#52c41a", "#faad14"], // Blue for current, Green for high, Orange for low
   };
 
   return (
