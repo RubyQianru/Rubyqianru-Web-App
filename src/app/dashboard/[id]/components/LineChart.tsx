@@ -15,7 +15,7 @@ const LineChart = ({ data }: { data: Crypto[] }) => {
     setColor(data[data.length - 1].price > data[0].price ? "green" : "red");
   }, [data]);
 
-  const updatedData = chartData.map((item: Crypto, index: number) => ({
+  const updatedData = chartData.map((item: Crypto) => ({
     time: dayjs(item.time).format("MM-DD HH:mm"),
     price: item.price,
     type: "Current Price",

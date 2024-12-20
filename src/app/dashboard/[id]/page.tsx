@@ -7,6 +7,7 @@ import { getTwitterData } from "./utils/getTwitterData";
 import Title from "antd/es/typography/Title";
 import Divider from "antd/lib/divider";
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export default async function page({ params }: { params: any }) {
   const symbol = params.id;
 

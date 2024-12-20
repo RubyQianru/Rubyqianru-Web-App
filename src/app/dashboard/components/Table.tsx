@@ -84,9 +84,9 @@ export default function DataTable({ data }: { data: Crypto[] }) {
         size="large"
         spinning={dataSource.length == 0}
       >
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         <Table
           dataSource={dataSource}
+          /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
           columns={columns as any}
           bordered={false}
         />
