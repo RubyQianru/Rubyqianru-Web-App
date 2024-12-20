@@ -15,7 +15,7 @@ const TweetTable = ({ data }: { data: Twitter[] }) => {
       title: "Text",
       dataIndex: "text",
       key: "text",
-      width: 300,
+      width: 500,
       // ellipsis: true,
     },
     {
@@ -77,7 +77,7 @@ const TweetTable = ({ data }: { data: Twitter[] }) => {
       dataSource={data}
       rowKey="_id"
       scroll={{ x: true }}
-      pagination={{ pageSize: 10 }}
+      pagination={{ pageSize: 5 }}
       bordered={false}
       className="transparent-table"
       rowClassName={() => "table-row"}

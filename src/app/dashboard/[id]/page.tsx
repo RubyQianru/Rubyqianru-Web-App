@@ -1,33 +1,41 @@
 import LineChart from "./components/LineChart";
 import TweetTable from "./components/TwitterTable";
+import InfoCard from "./components/InfoCard";
+import IndexCard from "./components/IndexCard";
 import { getCryptoDataByDay } from "./utils/getCryptoData";
 import { getTwitterData } from "./utils/getTwitterData";
 import Title from "antd/es/typography/Title";
+import Divider from "antd/lib/divider";
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export default async function page({ params }: { params: any }) {
   const symbol = params.id;
 
-  const cryptoData = await getCryptoDataByDay(symbol as string, "3");
+  const cryptoData = await getCryptoDataByDay(symbol as string, "1");
   const twitterData = await getTwitterData(symbol as string, "1");
 
   return (
-    <>
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 ">
-        <div className="w-full flex items-start">
-          <Title>
-            {symbol} ({symbol})
-          </Title>
-        </div>
-        <main className="flex flex-col gap-8 row-start-2 items-center justify-center">
-          <div className="w-full overflow-auto gap-8 flex flex-col justify-center md:w-10/12 overflow-auto ">
-            <div>
+    <div className="min-h-screen p-6 md:p-8 pb-20">
+      <div className="max-w-7xl mx-auto">
+        <Title>
+          {cryptoData.length > 0 ? cryptoData[0].name : symbol} ({symbol})
+        </Title>
+        <main className="space-y-8">
+          <section className="grid gap-8 overflow-x-auto grid-cols-2 md:grid-cols-3">
+            <div className="flex flex-col gap-4 w-full col-span-2 md:col-span-1">
+              <InfoCard data={cryptoData} />
+              <IndexCard />
+            </div>
+            <div className="w-full h-full col col-span-2 flex items-center">
               <LineChart data={cryptoData} />
             </div>
+          </section>
+          <Divider />
+          <section className="overflow-x-auto">
+            <h1 className="text-l mb-6 md:text-3xl mb-8">Recent top Tweets</h1>
             <TweetTable data={twitterData} />
-          </div>
+          </section>
         </main>
       </div>
-    </>
+    </div>
   );
 }

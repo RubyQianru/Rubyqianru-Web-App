@@ -5,6 +5,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Crypto } from "@/types/crypto";
 import Link from "next/link";
 import dayjs from "dayjs";
+import { formatToDollarPrice } from "@/app/utils/price";
 
 export default function DataTable({ data }: { data: Crypto[] }) {
   const [dataSource, setDataSource] = useState<Crypto[]>([]);
@@ -33,30 +34,36 @@ export default function DataTable({ data }: { data: Crypto[] }) {
       title: "Price",
       dataIndex: "price",
       width: 200,
+      render: (price: number) => <>{formatToDollarPrice(price)}</>,
       key: "price",
     },
     {
       title: "Day High",
       dataIndex: "dayHigh",
       width: 200,
+      render: (price: number) => <>{formatToDollarPrice(price)}</>,
       key: "dayHigh",
     },
     {
       title: "Day Low",
       dataIndex: "dayLow",
       width: 200,
+      render: (price: number) => <>{formatToDollarPrice(price)}</>,
+
       key: "dayLow",
     },
     {
       title: "Open",
       dataIndex: "open",
       width: 200,
+      render: (price: number) => <>{formatToDollarPrice(price)}</>,
       key: "open",
     },
     {
       title: "Volume",
       dataIndex: "volume",
       width: 200,
+      render: (price: number) => <>{formatToDollarPrice(price)}</>,
       key: "volume",
     },
     {
