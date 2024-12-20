@@ -4,6 +4,7 @@ import InfoCard from "./components/InfoCard";
 import IndexCard from "./components/IndexCard";
 import { getCryptoDataByDay } from "./utils/getCryptoData";
 import { getTwitterData } from "./utils/getTwitterData";
+import { getReportData } from "./utils/getReportData";
 import Title from "antd/es/typography/Title";
 import Divider from "antd/lib/divider";
 
@@ -13,6 +14,7 @@ export default async function page({ params }: { params: any }) {
 
   const cryptoData = await getCryptoDataByDay(symbol as string, "1");
   const twitterData = await getTwitterData(symbol as string, "1");
+  const reportData = await getReportData(symbol as string, "1");
 
   return (
     <div className="min-h-screen p-6 md:p-8 pb-20">
@@ -24,7 +26,7 @@ export default async function page({ params }: { params: any }) {
           <section className="grid gap-8 overflow-x-auto grid-cols-2 md:grid-cols-3">
             <div className="flex flex-col gap-4 w-full col-span-2 md:col-span-1">
               <InfoCard data={cryptoData} />
-              <IndexCard />
+              <IndexCard data={reportData} />
             </div>
             <div className="w-full h-full col col-span-2 flex items-center">
               <LineChart data={cryptoData} />

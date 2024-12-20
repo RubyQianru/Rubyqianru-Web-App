@@ -2,14 +2,14 @@
 import React from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 
-const GaugeChart = () => {
+const GaugeChart = ({ value }: { value: number }) => {
   return (
     <ReactSpeedometer
-      value={333}
+      value={value}
       minValue={0}
-      maxValue={500}
+      maxValue={1}
       needleColor="steelblue"
-      needleTransitionDuration={4000}
+      needleTransitionDuration={2000}
     />
   );
 };
