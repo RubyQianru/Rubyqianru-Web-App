@@ -1,5 +1,4 @@
 import LineChart from "./components/LineChart";
-
 import TweetTable from "./components/TwitterTable";
 import { getCryptoDataByDay } from "./utils/getCryptoData";
 import { getTwitterData } from "./utils/getTwitterData";
@@ -9,8 +8,8 @@ import Title from "antd/es/typography/Title";
 export default async function page({ params }: { params: any }) {
   const symbol = params.id;
 
-  const cryptoData = await getCryptoDataByDay("3", symbol as string);
-  const twitterData = await getTwitterData();
+  const cryptoData = await getCryptoDataByDay(symbol as string, "3");
+  const twitterData = await getTwitterData(symbol as string, "1");
 
   return (
     <>

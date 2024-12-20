@@ -1,8 +1,8 @@
 import { cryptodb, username, password } from "@/config/config";
 
-export async function getAllPrices(symbol: string) {
+export async function getCoinList() {
   try {
-    const data = await fetch(`${cryptodb}?symbol=${symbol}`, {
+    const data = await fetch(`${cryptodb}coin_list`, {
       headers: {
         Authorization: "Basic " + btoa(username + ":" + password),
       },
