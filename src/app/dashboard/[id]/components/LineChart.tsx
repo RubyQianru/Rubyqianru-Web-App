@@ -8,12 +8,14 @@ import { Spin } from "antd";
 
 const LineChart = ({ data }: { data: Crypto[] }) => {
   const [chartData, setChartData] = useState<Crypto[]>([]);
+  const [color, setColor] = useState<string>("red");
 
   useEffect(() => {
     setChartData(data);
+    setColor(data[data.length - 1].price > data[0].price ? "green" : "red");
   }, [data]);
 
-  const updatedData = chartData.map((item: Crypto) => ({
+  const updatedData = chartData.map((item: Crypto, index: number) => ({
     time: dayjs(item.time).format("MM-DD HH:mm"),
     price: item.price,
     type: "Current Price",
@@ -24,15 +26,19 @@ const LineChart = ({ data }: { data: Crypto[] }) => {
     xField: "time",
     yField: "price",
     seriesField: "type",
-    smooth: true,
-    line: {
-      visible: true,
-      size: 5,
-      smooth: true,
+    colorField: "value",
+    style: {
+      gradient: "y",
+      lineWidth: 2,
     },
     yAxis: {
       title: {
         text: "Price (USD)",
+      },
+    },
+    scale: {
+      color: {
+        range: [color],
       },
     },
     xAxis: {

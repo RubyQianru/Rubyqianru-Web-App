@@ -78,7 +78,11 @@ export default function DataTable({ data }: { data: Crypto[] }) {
         spinning={dataSource.length == 0}
       >
         {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <Table dataSource={dataSource} columns={columns as any} />
+        <Table
+          dataSource={dataSource}
+          columns={columns as any}
+          bordered={false}
+        />
       </Spin>
     </>
   );

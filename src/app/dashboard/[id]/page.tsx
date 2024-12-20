@@ -1,4 +1,5 @@
 import LineChart from "./components/LineChart";
+
 import TweetTable from "./components/TwitterTable";
 import { getCryptoDataByDay } from "./utils/getCryptoData";
 import { getTwitterData } from "./utils/getTwitterData";

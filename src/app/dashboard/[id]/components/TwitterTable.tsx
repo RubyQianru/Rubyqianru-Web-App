@@ -78,6 +78,9 @@ const TweetTable = ({ data }: { data: Twitter[] }) => {
       rowKey="_id"
       scroll={{ x: true }}
       pagination={{ pageSize: 10 }}
+      bordered={false}
+      className="transparent-table"
+      rowClassName={() => "table-row"}
     />
   );
 };

@@ -10,7 +10,7 @@ export default async function page() {
       </div>
       <main className="flex flex-col gap-8 row-start-2 items-center justify-center">
         <div className="w-full overflow-auto gap-8 flex flex-col justify-center md:w-10/12 overflow-auto ">
-          {cryptoData.length > 0 ? (
+          {cryptoData && cryptoData.length > 0 ? (
             <DataTable data={[cryptoData[cryptoData.length - 1]]} />
           ) : (
             <></>
