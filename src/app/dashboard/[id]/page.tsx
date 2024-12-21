@@ -26,7 +26,7 @@ export default async function page({ params }: { params: any }) {
           <section className="grid gap-8 overflow-x-auto grid-cols-2 md:grid-cols-3">
             <div className="flex flex-col gap-4 w-full col-span-2 md:col-span-1">
               <InfoCard data={cryptoData} />
-              <IndexCard data={reportData} />
+              <IndexCard data={reportData} price={cryptoData} />
             </div>
             <div className="w-full h-full col col-span-2 flex items-center">
               <LineChart data={cryptoData} />
