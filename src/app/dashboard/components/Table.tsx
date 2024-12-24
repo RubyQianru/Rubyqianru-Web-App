@@ -32,7 +32,7 @@ export default function DataTable({ data }: { data: Crypto[] }) {
       dataIndex: "name",
       width: 200,
       key: "name",
-      render: (name: string, record: Crypto) => <b>{name.split(" ")[0]}</b>,
+      render: (name: string) => <b>{name.split(" ")[0]}</b>,
     },
     {
       title: "Price",
@@ -101,6 +101,7 @@ export default function DataTable({ data }: { data: Crypto[] }) {
             onClick: () => handleRowClick(record),
             style: { cursor: "pointer" },
           })}
+          scroll={{ x: true }}
         />
       </Spin>
     </>

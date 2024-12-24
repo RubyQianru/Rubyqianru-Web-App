@@ -1,7 +1,9 @@
+/* eslint-disable */
 "use client";
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import { formatToDollarPrice } from "@/app/utils/price";
+import useWindowDimensions from "@/app/utils/window";
 
 interface TreeNode {
   name: string;
@@ -14,17 +16,17 @@ interface LeaveNode {
 }
 
 const TreeMap = ({
-  width,
-  height,
   data,
   colorData,
 }: {
-  width: number;
-  height: number;
   data: TreeNode;
   colorData: LeaveNode[];
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
+  const { width, height } = useWindowDimensions();
+
+  const mapWidth = Math.min(width * 0.8, 1250);
+  const mapHeight = Math.min(height * 0.6, 400);
 
   useEffect(() => {
     if (!svgRef.current || !data) return;
@@ -69,7 +71,10 @@ const TreeMap = ({
       .sum((d) => (d as any).value)
       .sort((a, b) => (b.value || 0) - (a.value || 0));
 
-    const treemapLayout = d3.treemap<any>().size([width, height]).padding(1);
+    const treemapLayout = d3
+      .treemap<any>()
+      .size([mapWidth, mapHeight])
+      .padding(1);
     treemapLayout(root);
 
     const nodes = svg
@@ -112,9 +117,9 @@ const TreeMap = ({
         i === nodes.length - 1 ? 0.7 : null
       )
       .text((d: any) => d);
-  }, [data, width, height]);
+  }, [data, mapWidth, mapHeight]);
 
-  return <svg ref={svgRef} width={width} height={height}></svg>;
+  return <svg ref={svgRef} width={mapWidth} height={mapHeight}></svg>;
 };
 
 export default TreeMap;
