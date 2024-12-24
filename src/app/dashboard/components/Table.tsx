@@ -3,38 +3,46 @@ import { Spin, Table } from "antd";
 import React, { useState, useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Crypto } from "@/types/crypto";
-import Link from "next/link";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
+
 import { formatToDollarPrice } from "@/app/utils/price";
 
 export default function DataTable({ data }: { data: Crypto[] }) {
   const [dataSource, setDataSource] = useState<Crypto[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     setDataSource(data);
   }, [data]);
 
+  const handleRowClick = (record: Crypto) => {
+    router.push(`/dashboard/${record.symbol}`);
+  };
+
   const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      width: 400,
-      key: "name",
-      render: (name: string, record: Crypto) => (
-        <Link href={`/dashboard/${record.symbol}`}>{name}</Link>
-      ),
-    },
     {
       title: "Symbol",
       dataIndex: "symbol",
-      width: 200,
+      width: 100,
       key: "symbol",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      width: 200,
+      key: "name",
+      render: (name: string, record: Crypto) => <b>{name.split(" ")[0]}</b>,
     },
     {
       title: "Price",
       dataIndex: "price",
       width: 200,
-      render: (price: number) => <>{formatToDollarPrice(price)}</>,
+      render: (price: number, record: Crypto) => (
+        <span style={{ color: record.delta_price < 0 ? "red" : "green" }}>
+          {formatToDollarPrice(price)}
+        </span>
+      ),
       key: "price",
     },
     {
@@ -49,7 +57,6 @@ export default function DataTable({ data }: { data: Crypto[] }) {
       dataIndex: "dayLow",
       width: 200,
       render: (price: number) => <>{formatToDollarPrice(price)}</>,
-
       key: "dayLow",
     },
     {
@@ -60,12 +67,13 @@ export default function DataTable({ data }: { data: Crypto[] }) {
       key: "open",
     },
     {
-      title: "Volume",
+      title: "24H Volume",
       dataIndex: "volume",
-      width: 200,
+      width: 250,
       render: (price: number) => <>{formatToDollarPrice(price)}</>,
       key: "volume",
     },
+
     {
       title: "Updated At",
       dataIndex: "time",
@@ -89,6 +97,10 @@ export default function DataTable({ data }: { data: Crypto[] }) {
           /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
           columns={columns as any}
           bordered={false}
+          onRow={(record) => ({
+            onClick: () => handleRowClick(record),
+            style: { cursor: "pointer" },
+          })}
         />
       </Spin>
     </>
