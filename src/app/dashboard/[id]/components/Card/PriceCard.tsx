@@ -31,7 +31,7 @@ const PriceCard = ({ cryptoData }: { cryptoData: Crypto[] }) => {
       const thirtyDayData = cryptoData.slice(-720);
       setPriceData(thirtyDayData);
     }
-    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [selectedDay]);
 
   return (
