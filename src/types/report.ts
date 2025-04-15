@@ -30,4 +30,5 @@ export type ReportBTC = {
   symbol: string;
   time: string;
   predict: string;
+  accuracy?: number;
 };

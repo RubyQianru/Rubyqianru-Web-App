@@ -24,9 +24,9 @@ const TreeMap = ({
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const { width, height } = useWindowDimensions();
-
-  const mapWidth = Math.min(width * 0.8, 1250);
-  const mapHeight = Math.min(height * 0.6, 400);
+  console.log(width, height);
+  const mapWidth = Math.min(width, 1440);
+  const mapHeight = Math.min(height * 0.8, 600);
 
   useEffect(() => {
     if (!svgRef.current || !data) return;

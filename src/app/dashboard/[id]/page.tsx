@@ -14,7 +14,7 @@ export default async function page({ params }: { params: any }) {
   const symbol = params.id;
   const cryptoData = await getCryptoDataByDay(symbol as string, "30");
   const twitterData = await getTwitterData(symbol as string, "1");
-  const reportData = await getReportData(symbol as string, "1");
+  const reportData = await getReportData(symbol as string, "30");
 
   return (
     <div className="min-h-screen p-6 md:p-8 pb-20">
@@ -38,7 +38,10 @@ export default async function page({ params }: { params: any }) {
               {symbol !== "BTC" && <IndexCard data={reportData} />}
               {symbol === "BTC" && <BTCCard data={reportData} />}
             </div>
-            <PriceCard cryptoData={cryptoData} />
+            {symbol !== "BTC" && <PriceCard cryptoData={cryptoData} />}
+            {symbol === "BTC" && (
+              <PriceCard cryptoData={cryptoData} reportData={reportData} />
+            )}
           </section>
           <Divider />
           <section className="overflow-x-auto">

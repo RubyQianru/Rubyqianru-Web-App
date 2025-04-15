@@ -14,7 +14,13 @@ const IndexCard = ({ data }: { data: Report[] }) => {
 
   return (
     <>
-      <Card title={"Sentiment Index"}>
+      <Card
+        title={"Sentiment Index"}
+        style={{
+          borderRadius: "8px",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
         <br />
         <div className="h-[200px] overflow-hidden w-full flex justify-center text-center">
           <GaugeChart value={parseFloat(confidence.toFixed(2))} />

@@ -1,5 +1,5 @@
 "use client";
-import { Spin, Table } from "antd";
+import { Spin, Table, Button, Tooltip } from "antd";
 import React, { useState, useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Crypto } from "@/types/crypto";
@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { formatToDollarPrice } from "@/app/utils/price";
 import styled from "styled-components";
+import { RightOutlined } from "@ant-design/icons";
 
 const StyledTable = styled(Table<Crypto>)`
   .ant-table {
@@ -46,7 +47,7 @@ interface PriceCellProps {
 }
 
 const PriceCell = styled.span<PriceCellProps>`
-  color: ${(props: PriceCellProps) => (props.isPositive ? "red" : "green")};
+  color: ${(props: PriceCellProps) => (props.isPositive ? "green" : "red")};
   font-weight: 500;
 `;
 
@@ -134,6 +135,23 @@ export default function DataTable({ data }: { data: Crypto[] }) {
       ),
       sorter: (a: Crypto, b: Crypto) =>
         new Date(a.time).getTime() - new Date(b.time).getTime(),
+    },
+    {
+      title: "Action",
+      key: "action",
+      width: 100,
+      render: (_: unknown, record: Crypto) => (
+        <Tooltip title="Go to sentiment analysis">
+          <Button
+            type="text"
+            icon={<RightOutlined />}
+            onClick={(e) => {
+              e.stopPropagation();
+              router.push(`/dashboard/${record.symbol}`);
+            }}
+          />
+        </Tooltip>
+      ),
     },
   ];
 

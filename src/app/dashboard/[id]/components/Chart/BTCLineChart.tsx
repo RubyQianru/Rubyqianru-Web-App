@@ -52,7 +52,7 @@ const LineChart = ({ data }: { data: Crypto[] }) => {
   };
 
   return (
-    <div className="relative">
+    <div>
       <Spin
         indicator={<LoadingOutlined spin />}
         size="large"

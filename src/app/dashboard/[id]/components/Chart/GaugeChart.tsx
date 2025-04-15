@@ -10,6 +10,7 @@ const GaugeChart = ({ value }: { value: number }) => {
       maxValue={1}
       needleColor="steelblue"
       needleTransitionDuration={2000}
+      currentValueText="Model Confidence"
     />
   );
 };
